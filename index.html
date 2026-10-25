@@ -100,6 +100,17 @@
         result.textContent = "";
     };
 </script>
+<h3>Student Search</h3>
+<input id="searchName" placeholder="Enter Student Name">
+<button onclick="searchStudent()">Search</button>
+<p id="searchResult"></p>
 
+<script>
+function searchStudent() {
+    let name = document.getElementById("searchName").value;
+    document.getElementById("searchResult").innerText =
+        "Searching for: " + name;
+}
+</script>
 </body>
 </html>
