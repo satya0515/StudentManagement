@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Registration</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: lightblue;
+            text-align: center;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            width: 300px;
+            margin: auto;
+        }
+        input, select, button {
+            margin: 5px;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Event Registration</h2>
+
+<form id="form">
+    <input id="name" placeholder="Full Name"><br>
+    <input id="email" placeholder="Email Address"><br>
+    <input id="phone" placeholder="Phone Number"><br>
+
+    <select id="gender">
+        <option value="">Select Gender</option>
+        <option>Male</option>
+        <option>Female</option>
+    </select><br>
+
+    <input id="college" placeholder="College Name"><br>
+    <input id="department" placeholder="Department"><br>
+
+    <select id="year">
+        <option value="">Select Year</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+    </select><br>
+
+    <select id="event">
+        <option value="">Select Event</option>
+        <option>Coding</option>
+        <option>Quiz</option>
+        <option>Hackathon</option>
+    </select><br>
+
+    <button type="submit">Register</button>
+    <button type="reset">Reset</button>
+</form>
+
+<p id="result"></p>
+
+<script>
+    let form = document.getElementById("form");
+    let result = document.getElementById("result");
+
+    form.onsubmit = function(e) {
+        e.preventDefault();
+
+        let ids = ["name", "email", "phone", "gender",
+                   "college", "department", "year", "event"];
+
+        let details = "";
+
+        for (let id of ids) {
+            let value = document.getElementById(id).value.trim();
+
+            if (value === "") {
+                result.textContent = "Please fill all fields!";
+                return;
+            }
+
+            if (id === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                result.textContent = "Invalid Email!";
+                return;
+            }
+
+            if (id === "phone" && !/^[0-9]{10}$/.test(value)) {
+                result.textContent = "Invalid Phone Number!";
+                return;
+            }
+
+            details += id + ": " + value + "\n";
+        }
+
+        result.textContent = "Registration Successful!\n" + details;
+        result.style.whiteSpace = "pre-line";
+    };
+
+    form.onreset = function() {
+        result.textContent = "";
+    };
+</script>
+
+</body>
+</html>
